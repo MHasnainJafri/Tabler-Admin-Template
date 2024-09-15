@@ -44,7 +44,7 @@
             </div>
             <div class="mt-3">
               <button class="btn btn-primary" type="button" data-bs-dismiss="offcanvas">
-                Close offcanvas
+                Close
               </button>
             </div>
           </div>
@@ -60,7 +60,7 @@
             </div>
             <div class="mt-3">
               <button class="btn btn-primary" type="button" data-bs-dismiss="offcanvas">
-                Close offcanvas
+                Close
               </button>
             </div>
           </div>
@@ -76,7 +76,7 @@
             </div>
             <div class="mt-3">
               <button class="btn btn-primary" type="button" data-bs-dismiss="offcanvas">
-                Close offcanvas
+                Close
               </button>
             </div>
           </div>
@@ -92,7 +92,7 @@
             </div>
             <div class="mt-3">
               <button class="btn btn-primary" type="button" data-bs-dismiss="offcanvas">
-                Close offcanvas
+                Close
               </button>
             </div>
           </div>

@@ -58,17 +58,11 @@
                     orderable: false,
                     render: function(data, type, row) {
 
-                        return `<td class="text-end">
-                    <span class="dropdown">
-                      <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
-                      <div class="dropdown-menu dropdown-menu-end">
-                        <a class="dropdown-item" data-bs-toggle="offcanvas" href="#offcanvasEnd" role="button" aria-controls="offcanvasEnd" onclick='editform(${JSON.stringify(row)})'>
+                        return `<button class="btn btn-info" data-bs-toggle="offcanvas" href="#offcanvasEnd" role="button" aria-controls="offcanvasEnd" onclick='editform(${JSON.stringify(row)})'>
                           Edit
-                        </a>
-                        <a class="dropdown-item" href="#" onclick="deleteRecord('/admin/roles/${row.id}', null)">Delete</a>
-                      </div>
-                    </span>
-                  </td>`;
+                        </button>
+                        <button class="btn btn-danger" href="#" onclick="deleteRecord('/admin/permissions/${row.id}', null)">Delete</button>
+                    `;
                     }
                 },
 
@@ -79,7 +73,7 @@
             table.draw();
         }
         function deleteRecord(route, contextref = null) {
-            customAjax.delete_confirm_modal(route, redrawDataTable)
+            customAjax.delete_confirm_modal(route,{},redrawDataTable)
         }
         function editform(row) {
             customAjax.showeditform(row)

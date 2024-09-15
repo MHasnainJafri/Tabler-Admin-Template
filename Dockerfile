@@ -103,6 +103,10 @@ RUN apk update; \
     && docker-php-source delete \
     && rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
+ENV PHP_MAX_EXECUTION_TIME 60
+RUN echo "max_execution_time=${PHP_MAX_EXECUTION_TIME}" > /usr/local/etc/php/conf.d/max_execution_time.ini
+
+
 RUN arch="$(apk --print-arch)" \
     && case "$arch" in \
     armhf) _cronic_fname='supercronic-linux-arm' ;; \

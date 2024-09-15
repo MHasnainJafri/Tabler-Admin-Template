@@ -19,7 +19,7 @@
                             placeholder="Please enter your name">
                     </div>
 
-                  
+
                     <div class="mb-3">
                         <button class="btn btn-primary" type="button" id="EditForm">
                             Update
@@ -45,7 +45,7 @@
 
         <div class="mt-3">
             <button class="btn btn-primary" type="button" data-bs-dismiss="offcanvas">
-                Close offcanvas
+                Close
             </button>
         </div>
     </div>

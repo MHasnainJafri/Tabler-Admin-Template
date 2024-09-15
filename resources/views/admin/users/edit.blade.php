@@ -24,20 +24,20 @@
                             placeholder="Please enter your email">
                     </div>
 
-                   
+
 
                             @if (!empty($data['roles']))
-                            <x-admin.select 
-                                label="Role" 
-                                name="role" 
-                                :options="$data['roles']" 
+                            <x-admin.select
+                                label="Role"
+                                name="role"
+                                :options="$data['roles']"
                                 optionIdKey="id"
-                                optionLabelKey="name" 
+                                optionLabelKey="name"
                             />
                         @endif
-                        
 
-                        
+
+
                     <div class="mb-3">
                         <button class="btn btn-primary" type="button" id="EditForm">
                             Update
@@ -63,7 +63,7 @@
 
         <div class="mt-3">
             <button class="btn btn-primary" type="button" data-bs-dismiss="offcanvas">
-                Close offcanvas
+                Close
             </button>
         </div>
     </div>

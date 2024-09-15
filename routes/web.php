@@ -58,6 +58,7 @@ Route::get('pages/{pageName}', function ($pageName) {
         Route::PUT('/{id}', [UserController::class, 'update'])->name('update');
         Route::get('/datatable', [UserController::class, 'datatable'])->name('datatable');
         Route::delete('/{id}', [UserController::class, 'destroy'])->name('destroy');
+        Route::post('/bulkAction', [UserController::class, 'bulkAction'])->name('bulkAction');
     });
 
 
@@ -123,7 +124,7 @@ Route::view('/profile/password', 'profile.password')->middleware('auth');
 
 Route::get('/home', function () {
     return view('admin.index');
-})->middleware(['auth', 'verified'])->name('home');
+})->middleware(['auth', 'verified'])->name('admin.dashboard');
 
 Route::fallback(function () {
 
@@ -136,8 +137,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/profile/settings', [profileController::class, 'settings'])->name('profile.settings');
     Route::resource('permissions', PermissionController::class)->names('admin.permissions');
 
-    Route::get('/permissionslist', [RoleController::class, 'datatable'])->name('admin.permissions.permissionslist');
+    Route::get('/permissionslist', [PermissionController::class, 'datatable'])->name('admin.permissions.permissionslist');
     Route::post('/admin/permissions/store', [RoleController::class, 'store'])->name('admin.roles.create');
+
 
 
 

@@ -43,11 +43,11 @@ class RoleService
 
     public function store($data)
     {
-       
+
         try {
             $role = $this->add($this->_model, $data);
 
-            if ($data['permissions']) {
+            if (isset($data['permissions'])) {
                 $role->givePermissionTo($data['permissions']);
             }
         } catch (\Exception $e) {

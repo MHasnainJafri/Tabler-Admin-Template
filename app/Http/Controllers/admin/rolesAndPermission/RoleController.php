@@ -25,6 +25,8 @@ class RoleController extends Controller
     }
     public function datatable(Request $request){
         $userDTO = new DatatableDTO($request->all());
+
+
         return $this->service->datatable($userDTO);
     }
     public function store(RoleRequest $request)
@@ -32,7 +34,7 @@ class RoleController extends Controller
         $validatedData = $request->validated();
 
         $this->service->store($validatedData);
-        
+
         return response()->json(['msg'=>'Role has been created successfully']);
     }
     public function update(RoleRequest $request, $id)

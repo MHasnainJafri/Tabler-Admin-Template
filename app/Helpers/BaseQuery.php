@@ -87,8 +87,14 @@ trait BaseQuery
     /**
      * delete record by its id
      */
-    public function delete($model, $id)
+    public function delete($model,int|array $id)
     {
-        return $model->findOrFail($id)->delete();
+        if(is_array($id)){
+           return $model->whereIn('id', $id)->delete();
+
+        }else{
+          return  $model->findOrFail($id)->delete();
+        }
+
     }
 }

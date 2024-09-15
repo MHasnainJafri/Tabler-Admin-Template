@@ -45,7 +45,7 @@ class UserService
 
     public function store($data)
     {
-       
+
         try {
             $role = $this->add($this->_model, $data);
         } catch (\Exception $e) {
@@ -70,6 +70,7 @@ class UserService
             throw new \Exception('Something went wrong while deleting the data.');
         }
     }
+
 
     public function datatable($DTO)
     {

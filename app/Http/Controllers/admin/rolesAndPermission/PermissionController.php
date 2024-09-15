@@ -35,7 +35,7 @@ class PermissionController extends Controller
         $validatedData = $request->validated();
 
         $this->service->store($validatedData);
-        
+
         return response()->json(['msg'=>'Role has been created successfully']);
     }
     public function update(PermissionRequest $request, $id)

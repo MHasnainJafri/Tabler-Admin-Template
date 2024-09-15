@@ -64,6 +64,17 @@ services:
       - .:/var/www/html
       - ./storage:/var/www/html/storage
       - ./bootstrap/cache:/var/www/html/bootstrap/cache
+    develop:
+      watch:
+        - action: sync
+          path: ./
+          target: /var/www/html
+          ignore:
+            - node_modules/
+            - vendor/
+        - action: sync+restart
+          path: composer-*.json
+          target: /var/www/html/composer-*.json
     ports:
       - "8080:8000"
     depends_on:
@@ -76,7 +87,7 @@ services:
     image: mysql:8.0
     environment:
       MYSQL_DATABASE: laravel
-      MYSQL_USER: root
+    #   MYSQL_USER: root
       MYSQL_PASSWORD: root_secret
       MYSQL_ROOT_PASSWORD: root_secret
     volumes:

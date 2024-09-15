@@ -32,7 +32,7 @@ class UserController extends Controller
         $validatedData = $request->validated();
 
         $this->service->store($validatedData);
-        
+
         return response()->json(['msg'=>'Data has been created successfully']);
     }
     public function update(UserRequest $request, $id)
@@ -45,6 +45,13 @@ class UserController extends Controller
     public function destroy($id)
     {
        $this->service->destroy($id);
+        return response()->json(['msg'=>'Data has been deleted successfully']);
+    }
+    public function bulkAction(Request $request)
+    {
+        if($request->action == 'delete'){
+            $this->service->destroy($request->ids);
+        }
         return response()->json(['msg'=>'Data has been deleted successfully']);
     }
 }
