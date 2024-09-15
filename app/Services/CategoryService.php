@@ -4,16 +4,12 @@ namespace App\Services;
 
 use App\Helpers\DataTableHelper;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Permission\Models\Permission;
 use App\Helpers\BaseQuery;
-use App\Models\User;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\DB;
+use App\Models\Category;
+use App\Models\Course;
 use Spatie\Permission\Models\Role;
 
-class UserService
+class CategoryService
 {
     use BaseQuery;
 
@@ -21,7 +17,7 @@ class UserService
 
     public function __construct()
     {
-        $this->_model = new User();
+        $this->_model = new Category();
     }
 
     public function index()
@@ -30,9 +26,6 @@ class UserService
             $data['roles']=Role::all();
             return $data;
         } catch (\Exception $e) {
-            if(env('APP_DEBUG') == true){
-                throw new \Exception($e->getMessage());
-            }
             throw new \Exception('Something went wrong while fetching permissions.');
         }
     }
@@ -42,10 +35,6 @@ class UserService
         try {
             return $this->get_by_id($this->_model, $id);
         } catch (\Exception $e) {
-            if(env('APP_DEBUG') == true){
-                throw new \Exception($e->getMessage());
-
-            }
             throw new \Exception('Something went wrong while fetching the data.');
         }
     }
@@ -56,10 +45,6 @@ class UserService
         try {
             $role = $this->add($this->_model, $data);
         } catch (\Exception $e) {
-            if(env('APP_DEBUG') == true){
-                throw new \Exception($e->getMessage());
-
-            }
             throw new \Exception($e);
         }
     }
@@ -69,10 +54,6 @@ class UserService
         try {
             return $this->get_by_id($this->_model, $id)->update($data);
         }catch (\Exception $e) {
-            if(env('APP_DEBUG') == true){
-                throw new \Exception($e->getMessage());
-
-            }
             throw new \Exception('Something went wrong while updating the data.');
         }
     }
@@ -82,10 +63,6 @@ class UserService
         try {
             $this->delete($this->_model, $id);
         } catch (\Exception $e) {
-            if(env('APP_DEBUG') == true){
-                throw new \Exception($e->getMessage());
-
-            }
             throw new \Exception('Something went wrong while deleting the data.');
         }
     }
@@ -94,7 +71,7 @@ class UserService
     public function datatable($DTO)
     {
         try {
-            $query =  $this->_model::query()->with('roles');
+            $query =  $this->_model::query()->withCount('courses');
             $roles = DataTableHelper::getDtoData($DTO, $query, ['name'], [1 => "name"]);
             return response()->json([
                 'draw' => $DTO->getDraw(),
@@ -103,6 +80,10 @@ class UserService
                 'data' => $roles,
             ]);
         } catch (\Exception $e) {
+            if(env('APP_DEBUG') == true){
+                throw new \Exception($e->getMessage());
+
+            }
             throw new \Exception('Something went wrong while processing the data.');
         }
     }

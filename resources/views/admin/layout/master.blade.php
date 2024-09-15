@@ -15,6 +15,21 @@
         @include('admin.layout.partials.header')
         @yield('content')
     </div>
+
+
+
+
+<!-- Progress Bar -->
+<div id="progress-container">
+    <div id="progress-bar"></div>
+</div>
+
+
+
+
+
+
+
     @yield('modals')
     @include('admin.layout.partials.Modals.reportModal')
 

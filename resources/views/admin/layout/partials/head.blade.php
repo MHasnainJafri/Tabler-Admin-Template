@@ -11,6 +11,7 @@
     <link href="{{asset('admin/dist/css/tabler-payments.min.css?1692870487')}}" rel="stylesheet"/>
     <link href="{{asset('admin/dist/css/tabler-vendors.min.css?1692870487')}}" rel="stylesheet"/>
     <link href="{{asset('admin/dist/css/demo.min.css?1692870487')}}" rel="stylesheet"/>
+    <link href="{{asset('admin/custom.css')}}" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
     <style>

@@ -145,7 +145,7 @@ class customDataTable {
 
 
      deleteRecord(route, contextref = null) {
-        customAjax.delete_confirm_modal(route,{} ,this.draw())
+        customAjax.delete_confirm_modal(route,{} ,()=>this.draw())
     }
 
      bulkAction(action, route) {

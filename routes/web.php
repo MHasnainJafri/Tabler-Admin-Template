@@ -6,11 +6,14 @@ use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\auth\social\SocialController;
 use App\Http\Controllers\admin\modules\users\UserController;
 use App\Http\Controllers\admin\modules\users\usersController;
+use App\Http\Controllers\admin\modules\Course\CourseController;
 use App\Http\Controllers\admin\modules\users\profileController;
+use App\Http\Controllers\admin\modules\Course\CategoryController;
 use App\Http\Controllers\admin\rolesAndPermission\RoleController;
 use App\Http\Controllers\admin\rolesAndPermission\PermissionController;
 
 Route::get('/', function () {
+    return redirect('/login');
     return view('admin.index');
 });
 
@@ -59,6 +62,30 @@ Route::get('pages/{pageName}', function ($pageName) {
         Route::get('/datatable', [UserController::class, 'datatable'])->name('datatable');
         Route::delete('/{id}', [UserController::class, 'destroy'])->name('destroy');
         Route::post('/bulkAction', [UserController::class, 'bulkAction'])->name('bulkAction');
+    });
+
+
+
+
+
+    Route::group(['prefix' => 'courses', 'as' => 'admin.courses.'], function () {
+        Route::get('/list', [CourseController::class, 'index'])->name('index');
+        Route::post('/store', [CourseController::class, 'store'])->name('store');
+        Route::PUT('/{id}', [CourseController::class, 'update'])->name('update');
+        Route::get('/datatable', [CourseController::class, 'datatable'])->name('datatable');
+        Route::delete('/{id}', [CourseController::class, 'destroy'])->name('destroy');
+        Route::post('/bulkAction', [CourseController::class, 'bulkAction'])->name('bulkAction');
+    });
+
+
+
+    Route::group(['prefix' => 'categories', 'as' => 'admin.categories.'], function () {
+        Route::get('/list', [CategoryController::class, 'index'])->name('index');
+        Route::post('/store', [CategoryController::class, 'store'])->name('store');
+        Route::PUT('/{id}', [CategoryController::class, 'update'])->name('update');
+        Route::get('/datatable', [CategoryController::class, 'datatable'])->name('datatable');
+        Route::delete('/{id}', [CategoryController::class, 'destroy'])->name('destroy');
+        Route::post('/bulkAction', [CategoryController::class, 'bulkAction'])->name('bulkAction');
     });
 
 

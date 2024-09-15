@@ -39,24 +39,54 @@ class CustomAjax {
         });
     }
 
-    post(url, data, successCallback, errorCallback) {
-
+    post(url, data, successCallback, errorCallback, options = {}) {
         $.ajax({
             url: url,
             type: 'POST',
             data: data,
+            xhr: function () {
+                var xhr = new window.XMLHttpRequest();
+                // Track progress
+                xhr.upload.addEventListener("progress", function (evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = evt.loaded / evt.total;
+                        $('#progress-container').show();  // Show the progress bar container
+                        $('#progress-bar').css('width', percentComplete + '%'); // You can update a progress bar here
+                    }
+                }, false);
+                return xhr;
+            },
+            beforeSend: function () {
+                $('#loading').show();
+                $('#progress-container').show(); // Ensure progress bar is visible
+
+            },
+            complete: function () {
+                $("#loading").hide();
+                $("#progress-container").hide(); // Hide progress bar when done
+                $("#progress-bar").css('width', '0');
+            },
+            contentType: options.contentType ?? false,  // Use false for FormData
+            processData: options.processData ?? false,  // False when sending FormData
             headers: {
-                'X-CSRF-Token': this.csrfToken,
+                'X-CSRF-Token': this.csrfToken,  // CSRF Token for Laravel
             },
             success: successCallback,
             error: errorCallback,
+            async: true,
+            cache: false,
+            timeout: 60000  // 1-minute timeout
         });
     }
-    put(url, data, successCallback, errorCallback) {
+
+
+    put(url, data, successCallback, errorCallback, options = {}) {
         $.ajax({
             url: url,
             type: 'PUT',
             data: data,
+            contentType: options.contentType ,
+            processData: options.processData ,
             headers: {
                 'X-CSRF-Token': this.csrfToken,
             },
@@ -64,6 +94,7 @@ class CustomAjax {
             error: errorCallback,
         });
     }
+
 
     delete(url, data={}, successCallback, errorCallback) {
         $.ajax({

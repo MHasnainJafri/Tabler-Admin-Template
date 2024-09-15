@@ -1,0 +1,20 @@
+#progress-container {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 300px;
+    height: 20px;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 9999999;  /* Ensures it is above other elements */
+    display: none;  /* Hidden initially */
+}
+
+#progress-bar {
+    height: 100%;
+    width: 0;
+    background-color: #4caf50;  /* Green bar */
+    border-radius: 5px;
+    transition: width 0.4s ease;
+}
